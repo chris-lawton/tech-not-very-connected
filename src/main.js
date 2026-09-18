@@ -72,6 +72,13 @@ function announce(text, tone = 'neutral') {
   }, 60);
 }
 
+function clearStatus() {
+  clearTimeout(announceTimer);
+  el.status.textContent = '';
+  el.status.dataset.tone = 'neutral';
+  el.status.classList.remove('has-spoken');
+}
+
 function tileFor(item) {
   return el.board.querySelector(`[data-item="${CSS.escape(item)}"]`);
 }
@@ -303,6 +310,7 @@ el.btn.deselect.addEventListener('click', () => {
 });
 
 el.btn.next.addEventListener('click', () => {
+  clearStatus();
   game.goToNextWall();
   if (game.state.screen === 'game') focusFirstTile();
 });
@@ -336,8 +344,8 @@ el.btn.reset.addEventListener('click', () => {
 el.btn.resetCancel.addEventListener('click', () => closeConfirm(el.confirmReset, el.btn.reset));
 el.btn.resetConfirm.addEventListener('click', () => {
   el.confirmReset.hidden = true;
+  clearStatus();
   game.resetGame();
-  el.status.classList.remove('has-spoken');
   el.btn.start.focus();
 });
 
@@ -350,6 +358,7 @@ el.btn.reviewBack.addEventListener('click', () => {
   el.btn.review.focus();
 });
 el.btn.playAgain.addEventListener('click', () => {
+  clearStatus();
   game.resetGame();
   el.btn.start.focus();
 });
