@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en-GB">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Tech Not Very Connected</title>
+    <meta
+      name="description"
+      content="A word-grouping puzzle for front-end and back-end engineers. Find the four hidden groups of four."
+    />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%A7%A9%3C/text%3E%3C/svg%3E" />
+    <link rel="stylesheet" href="./src/styles.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to game</a>
+
+    <header class="site-header">
+      <h1>Tech Not Very Connected</h1>
+      <p class="tagline">Sixteen words. Four hidden groups of four.</p>
+    </header>
+
+    <main id="main">
+      <nav aria-label="Walls" id="walls-nav">
+        <ul class="walls" id="progress"></ul>
+      </nav>
+
+      <!-- Intro, shown before the first wall starts -->
+      <section id="screen-intro" class="intro" aria-labelledby="intro-heading">
+        <h2 id="intro-heading">How to play</h2>
+        <p>Find four groups of four related tech terms.</p>
+        <p>Select four terms, then submit your guess.</p>
+        <p>Incorrect guesses are counted.</p>
+        <p>Work through Easy, Medium and Hard walls.</p>
+        <p>The timer starts when you begin.</p>
+        <div class="intro-actions">
+          <button type="button" id="btn-start" class="btn btn-primary">Start game</button>
+        </div>
+      </section>
+
+      <!-- Playing a wall -->
+      <section id="screen-game" aria-labelledby="wall-heading" hidden>
+        <p class="statline">
+          <span id="incorrect-count">0 incorrect</span>
+          <span aria-hidden="true">·</span>
+          <span id="found-count">0/4 groups</span>
+          <span aria-hidden="true">·</span>
+          <span id="timer">00:00</span>
+        </p>
+
+        <h2 class="visually-hidden" id="wall-heading">Easy wall</h2>
+
+        <div class="board" id="board"></div>
+
+        <div class="controls">
+          <button type="button" id="btn-submit" class="btn btn-primary" disabled>Submit</button>
+          <button type="button" id="btn-shuffle" class="btn btn-secondary">Shuffle</button>
+          <button type="button" id="btn-deselect" class="btn btn-secondary" hidden>Deselect all</button>
+          <p class="selection-hint" id="selection-hint">Select four items</p>
+        </div>
+
+        <p class="status" id="status" role="status"></p>
+
+        <div class="wall-done" id="wall-done" hidden>
+          <p id="wall-done-message"></p>
+          <button type="button" id="btn-next" class="btn btn-primary">Next wall</button>
+        </div>
+
+        <section class="solved-area" id="solved-area" aria-labelledby="solved-heading" hidden>
+          <h3 class="solved-title" id="solved-heading">Correct groups</h3>
+          <ul class="solved-list" id="solved-list"></ul>
+        </section>
+
+        <div class="extras">
+          <button type="button" id="btn-reveal" class="link-btn link-warn">Reveal answers</button>
+          <button type="button" id="btn-reset" class="link-btn link-danger">Reset game</button>
+        </div>
+
+        <!-- Confirmation panels, shown one at a time -->
+        <div class="confirm" id="confirm-reveal" role="group" aria-labelledby="confirm-reveal-title" hidden>
+          <h3 id="confirm-reveal-title">Reveal the answers for this wall?</h3>
+          <p>This shows all remaining groups. The wall will be marked as <strong>answers revealed</strong> and your run will not count as a competitive result.</p>
+          <div class="confirm-actions">
+            <button type="button" id="btn-reveal-confirm" class="btn btn-primary">Yes, reveal answers</button>
+            <button type="button" id="btn-reveal-cancel" class="btn">Keep playing</button>
+          </div>
+        </div>
+
+        <div class="confirm" id="confirm-reset" role="group" aria-labelledby="confirm-reset-title" hidden>
+          <h3 id="confirm-reset-title">Reset the whole game?</h3>
+          <p>This clears saved progress for all three walls, including your time and incorrect guesses.</p>
+          <div class="confirm-actions">
+            <button type="button" id="btn-reset-confirm" class="btn btn-primary">Yes, reset everything</button>
+            <button type="button" id="btn-reset-cancel" class="btn">Cancel</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Finished all three walls -->
+      <section id="screen-end" aria-labelledby="end-heading" hidden>
+        <h2 id="end-heading">All connections merged successfully 🎉</h2>
+        <ul class="results" id="results"></ul>
+        <dl class="totals" id="totals"></dl>
+        <p class="revealed-note" id="revealed-note" hidden>Answers were revealed during this run</p>
+        <div class="controls">
+          <button type="button" id="btn-review" class="btn btn-primary">Review answers</button>
+          <button type="button" id="btn-play-again" class="btn">Play again</button>
+        </div>
+      </section>
+
+      <!-- All 12 categories -->
+      <section id="screen-review" aria-labelledby="review-heading" hidden>
+        <h2 id="review-heading">Review answers</h2>
+        <div id="review-body"></div>
+        <div class="controls">
+          <button type="button" id="btn-review-back" class="btn btn-primary">Back to results</button>
+        </div>
+      </section>
+    </main>
+
+    <script type="module" src="./src/main.js"></script>
+  </body>
+</html>
