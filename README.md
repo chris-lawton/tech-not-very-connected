@@ -1,4 +1,4 @@
-# Tech Not Very Connected
+# Tech Not Connected
 
 A small word-grouping puzzle for front-end and back-end engineers, in the style of NYT Connections.
 
